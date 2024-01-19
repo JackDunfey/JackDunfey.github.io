@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack Dunfey | Home</title>
+    <style>
+        body, html{
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+            padding: 0px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            display: block;
+            width: 60%;
+            margin: 0px auto;
+        }
+        h1{
+            display: block;
+            text-align: center;
+            font-size: 3em;
+            margin: 0px;
+        }
+        p{
+            text-align: center;
+            margin: 2px 0px 18px 0px;
+        }
+        .nav{
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            max-width: 50%;
+            padding: 0px;
+            margin: 0px auto; 
+            /* border: 1px solid black; */
+        }
+        .nav > li{
+            float: left;
+        }
+        .nav > li > a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+        .nav > li > a:hover {
+            font-size: 1.2em;
+        }   
+        .profile-img{
+            width: 50%;
+            max-width: 260px;
+            aspect-ratio: 1/1;
+            display: block;
+            margin: 0px auto;
+            border-radius: 50%;
+            border: 2px solid limegreen;    
+        }
+        i{
+            font-size: 0.8em;
+        }
+        @keyframes throb-border {
+            0%{
+                border: 2px solid limegreen;
+            }
+            50%{
+                border: 12px solid red;
+            }
+            100%{
+                border: 2px solid limegreen;
+            }
+        }
+        .profile-img:hover{
+            --profile-img-timer: 1.5s;
+            transform: rotateZ(360deg);
+            animation: throb-border var(--profile-img-timer) linear 0s 1 forwards;
+            transition: transform var(--profile-img-timer);
+            transition-timing-function: cubic-bezier(.38,-0.05,.63,1.33);
+        }
+        #cover{
+            width: 100vw;
+            height: 100vh;
+            /* opacity: 0; */
+            background-color: black;
+            z-index: 1000;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/edf5490e4b.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="cover"></div>
+    <div class="container">
+        <div class="coin">
+            <img class="profile-img" src="linkedin-square.jpg" alt="Profile-img">
+        </div>
+        <h1>Jack Dunfey</h1>
+        <p><small>Work in Progress</small></p>
+        <ul class="nav">
+            <li><a href="about.html">About Me</a></li>
+            |
+            <li><a href="projects.html">Projects</a></li>
+            |
+            <li>
+                <a href="resume-v3.pdf" target="_blank">    
+                    R&eacute;sum&eacute; <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+                <a href="resume-v3.pdf" title="download" download>
+                    <i class="fa-solid fa-download"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        document.querySelector(".profile-img").addEventListener("click", function(e){
+            e.preventDefault();
+
+        });
+    </script>
+</body>
+</html>

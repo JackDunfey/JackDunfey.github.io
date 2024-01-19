@@ -10,6 +10,10 @@
             height: 100vh;
             margin: 0px;
             padding: 0px;
+        }
+        .containers-container{
+            width: 100%;
+            height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -71,6 +75,7 @@
             }
             100%{
                 border: 2px solid limegreen;
+                cursor: pointer;
             }
         }
         .profile-img:hover{
@@ -78,32 +83,93 @@
             transform: rotateZ(360deg);
             animation: throb-border var(--profile-img-timer) linear 0s 1 forwards;
             transition: transform var(--profile-img-timer);
-            transition-timing-function: cubic-bezier(.46,.17,.27,1.08);
+            transition-timing-function: cubic-bezier(.38,-0.05,.63,1.33); ;
+        }
+        @keyframes fade-to-black {
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+        #cover{
+            width: 100vw !important;
+            height: 100vh;
+            opacity: 0;
+            background-color: black;
+            z-index: 1000;
+            position: absolute;
+            display: none;
         }
     </style>
     <script src="https://kit.fontawesome.com/edf5490e4b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <div class="coin">
-            <img class="profile-img" src="linkedin-square.jpg" alt="Profile-img">
+    <div id="cover"></div>
+    <div class="containers-container">
+        <div class="container">
+            <div class="coin">
+                <img class="profile-img" src="linkedin-square.jpg" alt="Profile-img">
+            </div>
+            <h1>Jack Dunfey</h1>
+            <p><small>Work in Progress</small></p>
+            <ul class="nav">
+                <li><a href="about.html">About Me</a></li>
+                |
+                <li><a href="projects.html">Projects</a></li>
+                |
+                <li>
+                    <a href="resume-v3.pdf" target="_blank">    
+                        R&eacute;sum&eacute; <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                    <a href="resume-v3.pdf" title="download" download>
+                        <i class="fa-solid fa-download"></i>
+                    </a>
+                </li>
+            </ul>
         </div>
-        <h1>Jack Dunfey</h1>
-        <p><small>Work in Progress</small></p>
-        <ul class="nav">
-            <li><a href="about.html">About Me</a></li>
-            |
-            <li><a href="projects.html">Projects</a></li>
-            |
-            <li>
-                <a href="resume-v3.pdf" target="_blank">    
-                    R&eacute;sum&eacute; <i class="fa-solid fa-arrow-up-right-from-square"></i>
-                </a>
-                <a href="resume-v3.pdf" title="download" download>
-                    <i class="fa-solid fa-download"></i>
-                </a>
-            </li>
-        </ul>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>
+    <script src="firework.js" defer></script>
+    <script>
+        const mustard = new Audio("mustard-lol.mp3");
+        mustard.playbackRate = 3;
+        mustard.loop = true;
+        const victory_symphony = new Audio("17. Victory.mp3");
+        victory_symphony.currentTime = 70;
+        const music = this.location.hash.includes("mustard") ? mustard : victory_symphony;
+        music.addEventListener("canplaythrough", function(){
+            console.log("Sound ready!");
+        })
+        let isReady = false;
+        let isReadyTimeout = null;
+        document.querySelector(".profile-img").addEventListener("mouseenter", function(e){
+            console.log("Mouse entered");
+            isReadyTimeout = isReadyTimeout ?? window.setTimeout(function(){
+                isReady = true;
+                isReadyTimeout = null;
+            }, 1000);
+        })
+        document.querySelector(".profile-img").addEventListener("mouseleave", function(e){
+            isReady = false;
+            console.log("Mouse left");
+            window.clearTimeout(isReadyTimeout);
+            isReadyTimeout = null;
+        })
+        document.querySelector(".profile-img").addEventListener("click", function(e){
+            if(!isReady) return console.error("Not isReady");
+            e.preventDefault();
+            document.querySelector("#cover").style.display = "block";
+            document.querySelector("#cover").style.animation = "fade-to-black 1.1s forwards";
+            // begin fireworks
+            window.setTimeout(function(){
+                document.querySelector("#cover").style.zIndex = "-1";
+                firework_canvas.style.display = "block";
+                try {loop();} catch {}
+                window.setTimeout(music.play.bind(music), 300);
+            }, 1200);
+        });
+    </script>
 </body>
 </html>
