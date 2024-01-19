@@ -1,0 +1,1 @@
+Make gif of wordle solver in action.
