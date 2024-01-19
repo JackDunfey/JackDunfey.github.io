@@ -182,11 +182,11 @@
             document.querySelector("#cover").style.animation = "fade-to-black 1.1s forwards";
             // begin timer
             window.setTimeout(function (){
-                countdown.play();
                 let bigNumber = document.querySelector(".big-number");
                 bigNumber.style.visibility = "visible";
                 // animation: fade 1s linear 0s 3 forwards;
                 bigNumber.style.animation = "fade 1s linear 0s 3 forwards";
+                countdown.play();
                 let timer = setInterval(() => {
                     bigNumber.textContent = parseInt(bigNumber.textContent) - 1;
                     if(bigNumber.textContent == '0'){
