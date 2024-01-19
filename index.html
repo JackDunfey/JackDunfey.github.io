@@ -23,6 +23,11 @@
             display: block;
             text-align: center;
             font-size: 3em;
+            margin: 0px;
+        }
+        p{
+            text-align: center;
+            margin: 2px 0px 18px 0px;
         }
         .nav{
             list-style: none;
@@ -45,11 +50,22 @@
         .nav > li > a:hover {
             font-size: 1.2em;
         }
+        .profile-img{
+            width: 50%;
+            max-width: 260px    ;
+            aspect-ratio: 1/1;
+            display: block;
+            margin: 0px auto;
+            border-radius: 50%;
+            border: 2px solid limegreen;    
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <img class="profile-img" src="linkedin-square.jpg" alt="Profile-img">
         <h1>Jack Dunfey</h1>
+        <p><small>Work in Progress</small></p>
         <ul class="nav">
             <li><a href="about.html">About Me</a></li>
             |
