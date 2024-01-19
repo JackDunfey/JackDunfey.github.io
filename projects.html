@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects</title>
+    <!-- bootstrap cdn stuff -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter&family=Josefin+Sans&family=Nunito+Sans:opsz@6..12&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.8/holder.min.js" integrity="sha512-O6R6IBONpEcZVYJAmSC+20vdsM07uFuGjFf0n/Zthm8sOFW+lAq/OK1WOL8vk93GBDxtMIy6ocbj6lduyeLuqQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <style>
+        h1{
+            /* font-family: 'Dancing Script', cursive; */
+            font-family: 'Inter', sans-serif;
+            /* font-family: 'Josefin Sans', sans-serif; */
+            /* font-family: 'Nunito Sans', sans-serif; */
+            /* font-family: 'Press Start 2P', system-ui; */
+        }
+    </style>
+</head>
+<body>
+    <article>
+        <template id="project-template">
+            <section>
+                <div class="row">
+                    <div class="col-md-5" style="border-right: 1px solid black;">
+                        <h1 id="name"></h1>
+                        <img src="holder.js/300x200">   
+                    </div>
+                    <div class="col-md-7">
+                        <div class="subsection">
+                            <h4>Summary</h4>
+                            <p id="summary">During this project, I worked independently to vulnerability test PMTool, a project management software developed and used by University at Buffalo students in a variety of courses. My findings were then shared with Professor Alan Hunt to ensure major vulnerabilities were patched.</p>
+                        </div>
+                        <div class="subsection">
+                            <h4>Description</h4>
+                            <p id="description"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </template>
+    </article>
+    <script>
+        const projects = [
+            {
+                name: "PMTool Penetration Testing",
+                imageSrc: null,
+                summary: `During this project, I worked independently to vulnerability test PMTool, a project management software developed and used by University at Buffalo students in a variety of courses. My findings were then shared with Professor Alan Hunt to ensure major vulnerabilities were patched.`,
+                description: "<b>Test</b> <em>Test2</em>"
+            },
+            {
+                name: "GiftDibs",
+                imageSrc: null,
+                summary: `Created a service that enabled people to create groups and announce what gifts they were getting someone, so everyone can see the selected gift except the person the gift is for. This is great for holidays where one person will be receiving gifts from many sources.`,
+                description: "<b>Test</b> <em>Test2</em>"
+            },
+        ]
+        function fillTemplate(projectObject){
+            const { name, imageSrc, summary, description } = projectObject;
+            const template_contents = document.getElementById("project-template").cloneNode(true);
+            template_contents.content.getElementById("name").textContent = name;
+            template_contents.content.querySelector("img").src = imageSrc ?? "holder.js/300x200";
+            template_contents.content.getElementById("summary").innerHTML = summary;
+            template_contents.content.getElementById("description").innerHTML = description;
+            document.write(template_contents.innerHTML);
+        }
+        projects.forEach(fillTemplate)
+    </script>
+</body>
+</html>
