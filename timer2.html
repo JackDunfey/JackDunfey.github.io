@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,html{
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+            padding: 0px;
+        }
+        #cover{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+    </style>
+    <link rel="stylesheet" href="timer.css">
+</head>
+<body>
+    <div id="cover">
+        <h1 class="big-number">3</h1>
+    </div>
+    <script>
+        let bigNumber = document.querySelector(".big-number");
+        let count = 3;
+        window.setTimeout(function(){
+            let timer = setInterval(() => {
+                count--;
+                bigNumber.innerHTML = count;
+                if(count == 0){
+                    clearInterval(timer);
+                    // window.location.href = "index.html";
+                }
+            }, 1000);
+        }, 500);
+    </script>
+</body>
+</html>

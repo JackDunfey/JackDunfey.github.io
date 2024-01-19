@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,html{
+            width: 100vw;
+            height: 100vh;
+            margin: 0px;
+            padding: 0px;
+        }
+        #cover{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+        }
+        .big-number{
+    font-size: 10em;
+    background-color: black;
+    color: white;
+}
+@keyframes fade{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 1;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+#three{
+    opacity: 0;
+    animation: fade 1s linear 0s forwards;
+}
+#two{
+    opacity: 0;
+    animation: fade 1s linear 1s forwards;
+}
+#one{
+    opacity: 0;
+    animation: fade 1s linear 2s forwards;
+}
+    </style>
+    <link rel="stylesheet" href="timer.css">
+</head>
+<body>
+    <div id="cover">
+        <h1 class="big-number" id="three">3</h1>
+        <h1 class="big-number" id="two">2</h1>
+        <h1 class="big-number" id="one">1</h1>
+    </div>
+</body>
+</html>

@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jack Dunfey | Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Inter&family=Josefin+Sans&family=Nunito+Sans:opsz@6..12&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="timer.css">
     <style>
         body, html{
             width: 100vw;
@@ -102,11 +104,24 @@
             position: absolute;
             display: none;
         }
+        #cover > .big-number{
+            font-size: 12em;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: "Inter" !important;
+            visibility: hidden;
+            /* animation: fade 1s linear 0s 3 forwards; */
+        }
     </style>
     <script src="https://kit.fontawesome.com/edf5490e4b.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div id="cover"></div>
+    <div id="cover">
+        <div class="big-number">3</div>
+    </div>
     <div class="containers-container">
         <div class="container">
             <div class="coin">
@@ -134,14 +149,17 @@
     <script src="firework.js" defer></script>
     <script>
         const mustard = new Audio("mustard-lol.mp3");
-        mustard.playbackRate = 3;
+        mustard.playbackRate = 2;
         mustard.loop = true;
+        const boom = new Audio("vine-boom.mp3");
+        const countdown = new Audio("countdown.mp3");
         const victory_symphony = new Audio("17. Victory.mp3");
         victory_symphony.currentTime = 70;
         const music = this.location.hash.includes("mustard") ? mustard : victory_symphony;
-        music.addEventListener("canplaythrough", function(){
-            console.log("Sound ready!");
-        })
+        function soundReady(label){console.log(`${label} ready!`);}
+        music.addEventListener("canplaythrough", soundReady.bind(null,"Music"));
+        boom.addEventListener("canplaythrough", soundReady.bind(null, "Boom"));
+        countdown.addEventListener("canplaythrough", soundReady.bind(null, "Countdown"));
         let isReady = false;
         let isReadyTimeout = null;
         document.querySelector(".profile-img").addEventListener("mouseenter", function(e){
@@ -162,13 +180,30 @@
             e.preventDefault();
             document.querySelector("#cover").style.display = "block";
             document.querySelector("#cover").style.animation = "fade-to-black 1.1s forwards";
+            // begin timer
+            window.setTimeout(function (){
+                countdown.play();
+                let bigNumber = document.querySelector(".big-number");
+                bigNumber.style.visibility = "visible";
+                // animation: fade 1s linear 0s 3 forwards;
+                bigNumber.style.animation = "fade 1s linear 0s 3 forwards";
+                let timer = setInterval(() => {
+                    bigNumber.textContent = parseInt(bigNumber.textContent) - 1;
+                    if(bigNumber.textContent == '0'){
+                        clearInterval(timer);
+                        activateFireworks();
+                    }
+                }, 1000);
+            }, 1100);
             // begin fireworks
-            window.setTimeout(function(){
-                document.querySelector("#cover").style.zIndex = "-1";
-                firework_canvas.style.display = "block";
-                try {loop();} catch {}
-                window.setTimeout(music.play.bind(music), 300);
-            }, 1200);
+            function activateFireworks(){
+                window.setTimeout(function(){
+                    document.querySelector("#cover").style.zIndex = "-1";
+                    firework_canvas.style.display = "block";
+                    try {loop();} catch {}
+                    window.setTimeout(music.play.bind(music), 300);
+                }, 1000);
+            }
         });
     </script>
 </body>
