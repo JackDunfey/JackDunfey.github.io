@@ -58,18 +58,5 @@
             </template>
         </article>
     </div>
-    <script src="projects.js"></script>
-    <script>
-        function fillTemplate(projectObject){
-            const { name, imageSrc, summary, description } = projectObject;
-            const template_contents = document.getElementById("project-template").cloneNode(true);
-            template_contents.content.querySelector(".name").textContent = name;
-            template_contents.content.querySelector("img").src = imageSrc ?? "holder.js/300x200";
-            template_contents.content.querySelector(".summary").innerHTML = summary;
-            template_contents.content.querySelector(".description").innerHTML = description;
-            document.getElementById("projects").appendChild(template_contents.content);
-        }
-        projects.forEach(fillTemplate)
-    </script>
 </body>
 </html>
